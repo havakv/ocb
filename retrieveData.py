@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 sleepMinutes = 5 # time to sleep between every data retrieval.
 
-def retreiveAvailability(clientIdentifier):
+def retrieveAvailability(clientIdentifier):
     headers = {"Client-Identifier": clientIdentifier}
     urlAvailability = 'https://oslobysykkel.no/api/v1/stations/availability'
     availability = requests.get(urlAvailability, headers=headers)
@@ -41,7 +41,7 @@ def main():
     sleepSeconds = sleepMinutes * 60
     while True:
         logger.info('Retrieving data from Oslo City Bike')
-        availability = retreiveAvailability(clientId)
+        availability = retrieveAvailability(clientId)
         if availability.ok == False:
             logger.info('Problems reading: ' + str(availability.status_code))
             sleep(sleepSeconds)
